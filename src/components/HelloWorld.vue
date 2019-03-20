@@ -6,7 +6,7 @@
           hide-overlay
           no-click-animation
           v-model="dialog"
-          :fullscreen="$vuetify.breakpoint.smAndDown"
+          :fullscreen="$vuetify.breakpoint.smAndDown" 
           max-width="80vw"
         >
           <template v-slot:activator="{ on }">
@@ -16,7 +16,6 @@
           </template>
           <v-card flat>
             <v-toolbar flat>
-              <!-- <v-toolbar-title>Want to add one of these?</v-toolbar-title> -->
               <v-flex>
                 <v-toolbar-title class="underlined-header-wrapper">
                   <span class="underlined-header" style>Want to add one of these?</span>
@@ -49,6 +48,7 @@
                 <v-flex v-for="item in items" :key="item.id" md3>
                   <v-card flat>
                     <v-layout>
+                      <!-- desktop modal -->
                       <v-card-text class="hidden-sm-and-down">
                         <v-flex :xs4="$vuetify.breakpoint.smAndDown">
                           <v-img contain v-bind:src="item.image"></v-img>
@@ -74,7 +74,7 @@
                         >ADD TO CART</v-btn>
                       </v-card-text>
                     </v-layout>
-
+                    <!-- mobile fullscreen modal -->
                     <v-layout class="hidden-md-and-up mobile-border" fill-height>
                       <v-flex :xs9="$vuetify.breakpoint.smAndDown">
                         <v-img v-bind:src="item.image"></v-img>
@@ -91,7 +91,7 @@
                         <v-flex>
                           <span>{{ item.price }}</span>
                         </v-flex>
-                        <span class="pointer">ADD TO CART</span>
+                        <span class="addtobag">ADD TO CART</span>
                       </v-card-text>
                     </v-layout>
                   </v-card>
@@ -128,6 +128,7 @@ export default {
   data() {
     return {
       dialog: false,
+      //store of items
       items: [
         {
           id: 1,
@@ -190,6 +191,12 @@ export default {
 .pointer {
   cursor: pointer;
   border-bottom: 1px solid #333;
+  margin-right: 30px;
+  margin-bottom: 15px;
+}
+
+.addtobag {
+  cursor: pointer;
   margin-right: 30px;
   margin-bottom: 15px;
 }
