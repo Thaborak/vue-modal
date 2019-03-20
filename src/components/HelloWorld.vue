@@ -1,147 +1,237 @@
 <template>
-  <v-container>
-    <v-layout
-      text-xs-center
-      wrap
-    >
-      <v-flex xs12>
-        <v-img
-          :src="require('../assets/logo.svg')"
-          class="my-3"
-          contain
-          height="200"
-        ></v-img>
-      </v-flex>
+  <v-container fill-height fluid>
+    <v-layout text-xs-center wrap justify-center>
+      <v-flex align-self-center justify-center xs12>
+        <v-dialog
+          hide-overlay
+          no-click-animation
+          v-model="dialog"
+          :fullscreen="$vuetify.breakpoint.smAndDown"
+          max-width="80vw"
+        >
+          <template v-slot:activator="{ on }">
+            <button v-on="on" class="item">
+              <span>ADD TO CART</span>
+            </button>
+          </template>
+          <v-card flat>
+            <v-toolbar flat>
+              <!-- <v-toolbar-title>Want to add one of these?</v-toolbar-title> -->
+              <v-flex>
+                <v-toolbar-title class="underlined-header-wrapper">
+                  <span class="underlined-header" style>Want to add one of these?</span>
+                </v-toolbar-title>
+              </v-flex>
 
-      <v-flex mb-4>
-        <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to Vuetify
-        </h1>
-        <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br>please join our online
-          <a href="https://community.vuetifyjs.com" target="_blank">Discord Community</a>
-        </p>
-      </v-flex>
+              <v-spacer></v-spacer>
+              <v-btn icon @click="dialog = false">
+                <img
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAABiElEQVRYw9WYu23DMBBA7UKllnCjMdQb6cUVUmYBzWEI0AQC1HiNIEGKwH2SJvEEgQUod8YJYBRSJikquiteY/COTyZ5/Gzu7h82nAkKenp+2QIZUAAlUAENcCQa+q2kNth2u7ggdJICCqg1GVdqik2jC0LShJI3AWJjGsqVRBGERDvgEEFsDObczRKEBDnQLiA3gLnzIEEI3C8oNmbvJUj/3PGfyZ0Eac61Kwi2pjlpWq2HFeT0hZNMCSpb8Nv7x2PXdd/A5fPr/OrbOcZgLObAXBNtlVGQirC1zpFcPwAdnjzkTnos5rpRJ1OToJrqhL6+95U0yCGXG3HqlyDtrbXDEPU+kha53mGK1MPePQhmgUNllfRpayHTBYsZ8+lPxxHkkEIXLD1XpFUgkhxS6oJVQNkwikSSQypdMOgY5SIZKHctN7pgcPWfkpwhd0WUIPshZr9I2JcZ9oWa/VbH+7DA/rgl4sDK/sgv4tLE/top4uIu4ulDxOORiOc3EQ+YIp6AxTyir8EPCd3y3dBAqCYAAAAASUVORK5CYII="
+                  style="height: 20px; width: 20px;"
+                  @click="dialog = false"
+                >
+              </v-btn>
+            </v-toolbar>
+            <v-text class="hidden-sm-and-down" style="padding-left: 20px;">
+              Customers who bought the
+              <b style="font-weight: 700 color: black">SPX1501</b> also bought these popular items:
+            </v-text>
 
-      <v-flex
-        mb-5
-        xs12
-      >
-        <h2 class="headline font-weight-bold mb-3">What's next?</h2>
+            <v-container light>
+              <v-layout
+                align-space-around
+                justify-center
+                row
+                fill-height
+                wrap
+                :column="$vuetify.breakpoint.smAndDown"
+              >
+                <v-flex v-for="item in items" :key="item.id" md3>
+                  <v-card flat>
+                    <v-card-text class="px-4">
+                      <v-flex :xs5="$vuetify.breakpoint.smAndDown">
+                        <v-img v-bind:src="item.image"></v-img>
+                      </v-flex>
+                      <v-flex :xs1="$vuetify.breakpoint.smAndDown">
+                        <v-text>
+                          <v-text>
+                            <b>{{ item.title }}</b>
+                          </v-text>
+                        </v-text>
+                      </v-flex>
+                      <v-flex :xs1="$vuetify.breakpoint.smAndDown">
+                        <v-text>
+                          <v-text>{{ item.code }}</v-text>
+                        </v-text>
+                      </v-flex>
+                      <v-flex>
+                        <v-text>{{ item.price }}</v-text>
+                      </v-flex>
+                      <v-btn
+                        style="background: rgb(25, 70, 186);
+                        border: rgb(25, 70, 186) 2px solid;
+                        color: white;
+                        font-weight: 700;
+                        ma-0!important"
+                      >ADD TO CART</v-btn>
+                    </v-card-text>
+                  </v-card>
+                </v-flex>
+              </v-layout>
+              <v-flex>
+                <v-btn
+                  style="background: rgb(25, 70, 186);
+                        border: rgb(25, 70, 186) 2px solid;
+                        color: white;
+                        width: 100%;
+                        font-weight: 700"
+                  align-content-center
+                >ADD THESE 4 ITEMS AND SAVE 10%</v-btn>
+              </v-flex>
+              <v-layout align-center justify-end row fill-height column>
+                <v-spacer></v-spacer>
+              </v-layout>
 
-        <v-layout justify-center>
-          <a
-            v-for="(next, i) in whatsNext"
-            :key="i"
-            :href="next.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ next.text }}
-          </a>
-        </v-layout>
-      </v-flex>
-
-      <v-flex
-        xs12
-        mb-5
-      >
-        <h2 class="headline font-weight-bold mb-3">Important Links</h2>
-
-        <v-layout justify-center>
-          <a
-            v-for="(link, i) in importantLinks"
-            :key="i"
-            :href="link.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ link.text }}
-          </a>
-        </v-layout>
-      </v-flex>
-
-      <v-flex
-        xs12
-        mb-5
-      >
-        <h2 class="headline font-weight-bold mb-3">Ecosystem</h2>
-
-        <v-layout justify-center>
-          <a
-            v-for="(eco, i) in ecosystem"
-            :key="i"
-            :href="eco.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ eco.text }}
-          </a>
-        </v-layout>
+              <v-layout align-end justify-end row fill-height>
+                <span class="pointer" @click="dialog = false">No Thanks</span>
+                
+                <button class="item">
+                  <span>Continue to Checkout</span>
+                </button>
+              </v-layout>
+            </v-container>
+          </v-card>
+        </v-dialog>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      ecosystem: [
+export default {
+  data() {
+    return {
+      dialog: false,
+      isMobile: false,
+      items: [
         {
-          text: 'vuetify-loader',
-          href: 'https://github.com/vuetifyjs/vuetify-loader'
+          id: 1,
+          image:
+            "https://snowjoe.imgix.net/product-images/iON8024-XRP_Image01.jpg?auto=compress&fm=webp&w=700",
+          title: "Snow Joe Cordless Two Stage Snow...",
+          code: "ION8024-XRP",
+          price: "$999.99"
         },
         {
-          text: 'github',
-          href: 'https://github.com/vuetifyjs/vuetify'
+          id: 2,
+          image:
+            "https://cdn.shopify.com/s/files/1/1711/8241/products/SPX3001_01.jpg?v=1525204252",
+          title: "Sun Joe Electric Pressure Washer...",
+          code: "SPX3001",
+          price: "$179.99"
         },
         {
-          text: 'awesome-vuetify',
-          href: 'https://github.com/vuetifyjs/awesome-vuetify'
+          id: 3,
+          image:
+            "https://cdn.shopify.com/s/files/1/1711/8241/products/SPX-APC1G-01.jpg?v=1524846777",
+          title: "Sun Joe All-Purpose Heavy Duty Pressure Washe...",
+          code: "SPX-APC1G",
+          price: "$19.99"
+        },
+        {
+          id: 4,
+          image:
+            "https://snowjoe.imgix.net/product-images/SJEG24_separate.jpg?auto=compress&fm=webp&w=700",
+          title: "Snow Joe 2-in-1 Snow Pusher + Ice Chop...",
+          code: "SJEG24",
+          price: "$29.99"
         }
-      ],
-      importantLinks: [
-        {
-          text: 'Documentation',
-          href: 'https://vuetifyjs.com'
-        },
-        {
-          text: 'Chat',
-          href: 'https://community.vuetifyjs.com'
-        },
-        {
-          text: 'Made with Vuetify',
-          href: 'https://madewithvuetifyjs.com'
-        },
-        {
-          text: 'Twitter',
-          href: 'https://twitter.com/vuetifyjs'
-        },
-        {
-          text: 'Articles',
-          href: 'https://medium.com/vuetify'
-        }
-      ],
-      whatsNext: [
-        {
-          text: 'Explore components',
-          href: 'https://vuetifyjs.com/components/api-explorer'
-        },
-        {
-          text: 'Select a layout',
-          href: 'https://vuetifyjs.com/layout/pre-defined'
-        },
-        {
-          text: 'Frequently Asked Questions',
-          href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions'
-        }
-
       ]
-    })
+    };
   }
+};
 </script>
 
 <style>
+.item {
+  background: white;
+  border: rgb(25, 70, 186) 2px solid;
+  font-weight: 700;
+  color: rgb(25, 70, 186);
+  font-size: 16px;
+  width: 33%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
 
+.item:hover {
+  background: rgb(25, 70, 186);
+  border: rgb(25, 70, 186) 2px solid;
+  color: white;
+  font-weight: 700;
+}
+
+.pointer {
+  cursor: pointer;
+  border-bottom: 1px solid #333;
+  margin-right: 30px;
+  margin-bottom: 15px;
+}
+
+.underlined-header-wrapper {
+  width: 100%;
+  border-bottom: 1px solid #333;
+}
+.underlined-header {
+  border-bottom: solid;
+  border-color: #1946ba;
+  color: #333;
+  font-weight: 100;
+  line-height: 1.2;
+  margin: 0;
+  font-size: 36px;
+  padding-left: 5px;
+}
+
+.resultContainer {
+  height: 350px;
+}
+
+.upsell {
+}
+
+@media only screen and (max-width: 700px) {
+  .underlined-header {
+    font-size: 23px !important;
+  }
+}
+
+@media only screen and (min-width: 1401px) {
+  .vue-container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1400px;
+  }
+}
+
+@media only screen and (max-width: 1400px) and (min-width: 1100px) {
+  .vue-container {
+    margin-left: 3%;
+    margin-right: 3%;
+  }
+}
+@media only screen and (max-width: 1100px) and (min-width: 700px) {
+  .vue-container {
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .vue-container:not(.nav-wrapper) {
+    box-sizing: border-box;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
 </style>
+

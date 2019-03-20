@@ -1,20 +1,5 @@
 <template>
   <v-app>
-    <v-toolbar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
-    </v-toolbar>
-
     <v-content>
       <HelloWorld/>
     </v-content>
@@ -36,3 +21,25 @@ export default {
   }
 }
 </script>
+
+<style>
+  body {
+    margin: 0;
+    margin-top: 10px;
+    color: #333 !important;
+    font-family: "Open Sans", "Source Sans Pro", sans-serif !important;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+/* override vuetify cannot guarantee that this is "best practice" */
+  .application {
+    font-family: "Open Sans", "Source Sans Pro", sans-serif !important;
+}
+.theme--light .v-toolbar {
+  background-color: #ffffff !important;
+}
+
+</style>
+
+
+
