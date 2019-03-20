@@ -32,10 +32,10 @@
                 >
               </v-btn>
             </v-toolbar>
-            <v-text class="hidden-sm-and-down" style="padding-left: 20px;">
+            <span class="hidden-sm-and-down" style="padding-left: 20px;">
               Customers who bought the
               <b style="font-weight: 700 color: black">SPX1501</b> also bought these popular items:
-            </v-text>
+            </span>
 
             <v-container light>
               <v-layout
@@ -43,38 +43,57 @@
                 justify-center
                 row
                 fill-height
-                wrap
                 :column="$vuetify.breakpoint.smAndDown"
+                :align-start-between="$vuetify.breakpoint.smAndDown"
               >
                 <v-flex v-for="item in items" :key="item.id" md3>
                   <v-card flat>
-                    <v-card-text class="px-4">
-                      <v-flex :xs5="$vuetify.breakpoint.smAndDown">
-                        <v-img v-bind:src="item.image"></v-img>
-                      </v-flex>
-                      <v-flex :xs1="$vuetify.breakpoint.smAndDown">
-                        <v-text>
-                          <v-text>
+                    <v-layout>
+                      <v-card-text class="hidden-sm-and-down">
+                        <v-flex :xs4="$vuetify.breakpoint.smAndDown">
+                          <v-img contain v-bind:src="item.image"></v-img>
+                        </v-flex>
+                        <v-flex >
+                          <span>
                             <b>{{ item.title }}</b>
-                          </v-text>
-                        </v-text>
-                      </v-flex>
-                      <v-flex :xs1="$vuetify.breakpoint.smAndDown">
-                        <v-text>
-                          <v-text>{{ item.code }}</v-text>
-                        </v-text>
-                      </v-flex>
-                      <v-flex>
-                        <v-text>{{ item.price }}</v-text>
-                      </v-flex>
-                      <v-btn
-                        style="background: rgb(25, 70, 186);
+                          </span>
+                        </v-flex>
+                        <v-flex>
+                          <span>{{ item.code }}</span>
+                        </v-flex>
+                        <v-flex>
+                          <span>{{ item.price }}</span>
+                        </v-flex>
+                        <v-btn
+                          style="background: rgb(25, 70, 186);
                         border: rgb(25, 70, 186) 2px solid;
                         color: white;
                         font-weight: 700;
                         ma-0!important"
-                      >ADD TO CART</v-btn>
-                    </v-card-text>
+                          :pointer="$vuetify.breakpoint.smAndDown"
+                        >ADD TO CART</v-btn>
+                      </v-card-text>
+                    </v-layout>
+
+                    <v-layout class="hidden-md-and-up mobile-border" fill-height>
+                      <v-flex :xs9="$vuetify.breakpoint.smAndDown">
+                        <v-img v-bind:src="item.image"></v-img>
+                      </v-flex>
+                      <v-card-text>
+                        <v-flex>
+                          <span>
+                            <b>{{ item.title }}</b>
+                          </span>
+                        </v-flex>
+                        <v-flex>
+                          <span>{{ item.code }}</span>
+                        </v-flex>
+                        <v-flex>
+                          <span>{{ item.price }}</span>
+                        </v-flex>
+                        <span class="pointer">ADD TO CART</span>
+                      </v-card-text>
+                    </v-layout>
                   </v-card>
                 </v-flex>
               </v-layout>
@@ -88,14 +107,11 @@
                   align-content-center
                 >ADD THESE 4 ITEMS AND SAVE 10%</v-btn>
               </v-flex>
-              <v-layout align-center justify-end row fill-height column>
-                <v-spacer></v-spacer>
-              </v-layout>
 
               <v-layout align-end justify-end row fill-height>
                 <span class="pointer" @click="dialog = false">No Thanks</span>
                 
-                <button class="item">
+                <button class="item" @click="dialog = false">
                   <span>Continue to Checkout</span>
                 </button>
               </v-layout>
@@ -112,7 +128,6 @@ export default {
   data() {
     return {
       dialog: false,
-      isMobile: false,
       items: [
         {
           id: 1,
@@ -134,7 +149,7 @@ export default {
           id: 3,
           image:
             "https://cdn.shopify.com/s/files/1/1711/8241/products/SPX-APC1G-01.jpg?v=1524846777",
-          title: "Sun Joe All-Purpose Heavy Duty Pressure Washe...",
+          title: "Sun Joe Heavy Duty Pressure Washe...",
           code: "SPX-APC1G",
           price: "$19.99"
         },
@@ -164,6 +179,7 @@ export default {
   padding-bottom: 1%;
 }
 
+
 .item:hover {
   background: rgb(25, 70, 186);
   border: rgb(25, 70, 186) 2px solid;
@@ -187,17 +203,21 @@ export default {
   border-color: #1946ba;
   color: #333;
   font-weight: 100;
-  line-height: 1.2;
+  line-height: 1.4;
   margin: 0;
   font-size: 36px;
   padding-left: 5px;
+  border-bottom-width: 5px;
 }
 
 .resultContainer {
   height: 350px;
 }
 
-.upsell {
+.mobile-border {
+  border-bottom: black 1px solid;
+  /* not sure if thats from the screenshot or not */
+  /* border-left: black 1px solid; */
 }
 
 @media only screen and (max-width: 700px) {
