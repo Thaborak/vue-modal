@@ -134,7 +134,7 @@ export default {
           id: 1,
           image:
             "https://snowjoe.imgix.net/product-images/iON8024-XRP_Image01.jpg?auto=compress&fm=webp&w=700",
-          title: "Snow Joe Cordless Two Stage Snow...",
+          title: "Cordless Two Stage Snow...",
           code: "ION8024-XRP",
           price: "$999.99"
         },
@@ -142,7 +142,7 @@ export default {
           id: 2,
           image:
             "https://cdn.shopify.com/s/files/1/1711/8241/products/SPX3001_01.jpg?v=1525204252",
-          title: "Sun Joe Electric Pressure Washer...",
+          title: "Electric Pressure Washer...",
           code: "SPX3001",
           price: "$179.99"
         },
@@ -150,7 +150,7 @@ export default {
           id: 3,
           image:
             "https://cdn.shopify.com/s/files/1/1711/8241/products/SPX-APC1G-01.jpg?v=1524846777",
-          title: "Sun Joe Heavy Duty Pressure Washe...",
+          title: "Heavy Duty Pressure Washe...",
           code: "SPX-APC1G",
           price: "$19.99"
         },
@@ -158,7 +158,7 @@ export default {
           id: 4,
           image:
             "https://snowjoe.imgix.net/product-images/SJEG24_separate.jpg?auto=compress&fm=webp&w=700",
-          title: "Snow Joe 2-in-1 Snow Pusher + Ice Chop...",
+          title: "2-in-1 Snow Pusher + Ice Chop...",
           code: "SJEG24",
           price: "$29.99"
         }
